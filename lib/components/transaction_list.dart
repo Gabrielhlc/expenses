@@ -58,13 +58,21 @@ class TransactionList extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   subtitle: Text(DateFormat('d MMM y').format(tr.date)),
-                  trailing: IconButton(
-                    onPressed: () {
-                      onRemoveTransaction(tr.id);
-                    },
-                    icon: const Icon(Icons.delete),
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 480
+                      ? TextButton.icon(
+                          onPressed: () => onRemoveTransaction(tr.id),
+                          icon: const Icon(Icons.delete),
+                          label: const Text('Excluir'),
+                          style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.all<Color>(
+                                Theme.of(context).colorScheme.error),
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: () => onRemoveTransaction(tr.id),
+                          icon: const Icon(Icons.delete),
+                          color: Theme.of(context).colorScheme.error,
+                        ),
                 ),
               );
             },
